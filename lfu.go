@@ -234,6 +234,10 @@ func (c *LFUCache) Purge() {
 
 	c.freqList = list.New()
 	c.items = make(map[interface{}]*lfuItem, c.size)
+	c.freqList.PushFront(&freqEntry{
+		freq:  0,
+		items: make(map[*lfuItem]byte),
+	})
 }
 
 // evict all expired entry
